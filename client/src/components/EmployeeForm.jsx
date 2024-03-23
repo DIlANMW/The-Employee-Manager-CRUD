@@ -50,7 +50,9 @@ function EmployeeForm() {
         email: Yup.string()
           .email("Invalid email")
           .required("Email is required"),
-        phone: Yup.string().required("Phone No is required"),
+        phone: Yup.string()
+          .matches(/^(\+94|0)?(7[1-9]\d{7}|0\d{9})$/, "Invalid phone number")
+          .required("Phone No is required"),
         gender: Yup.string().required("Gender is required"),
       });
 
