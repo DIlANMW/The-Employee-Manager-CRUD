@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function EmployeeForm() {
   const location = useLocation();
   const data = location.state;
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -52,12 +53,14 @@ function EmployeeForm() {
           `http://localhost:3000/api/employee/${data}`,
           formData
         );
+        navigate("/");
       } else {
         // Create new employee
         response = await axios.post(
           "http://localhost:3000/api/employee",
           formData
         );
+        navigate("/");
       }
       console.log("Response:", response.data);
     } catch (error) {

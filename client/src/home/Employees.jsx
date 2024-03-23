@@ -10,7 +10,19 @@ const Employees = () => {
   useEffect(() => {
     axios
       .get("http://localhost:3000/api/employee")
-      .then((result) => setEmpData(result.data))
+      .then((result) => {
+        // Sort the employee data
+        const sortedData = result.data.employees.sort((a, b) => {
+          const updatedAtComparison =
+            new Date(b.updatedAt) - new Date(a.updatedAt);
+          if (updatedAtComparison !== 0) {
+            return updatedAtComparison;
+          } else {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          }
+        });
+        setEmpData(sortedData);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -34,7 +46,7 @@ const Employees = () => {
         Add Employee +
       </Link>
       <div className="row">
-        {empData.employees?.map((employee) => (
+        {empData.map((employee) => (
           <div className="card bg-light-subtle" key={employee._id}>
             <div className="card-body">
               <div className="text-section">
