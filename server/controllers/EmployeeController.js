@@ -115,4 +115,37 @@ const deleteEmployee = async (request, response) => {
   }
 };
 
-export { createEmployee, getEmployee, updateEmployee, deleteEmployee };
+//Delete employee
+const getOneEmployee = async (request, response) => {
+  try {
+    const employeeId = request.params.id;
+    const employee = await EmployeeModel.findById(employeeId);
+
+    if (!employee) {
+      return response.status(404).json({
+        success: false,
+        message: "Employee not found",
+      });
+    }
+
+    response.status(200).json({
+      success: true,
+      employee,
+    });
+  } catch (error) {
+    console.error(error);
+    response.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+
+export {
+  createEmployee,
+  getEmployee,
+  updateEmployee,
+  deleteEmployee,
+  getOneEmployee,
+};
