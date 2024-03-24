@@ -52,17 +52,17 @@ body {
 
 .card-container {
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 3rem;
 }
 
 .btn-container {
   display: flex;
-  margin-bottom: 20px;
+  justify-content: right;
+  margin: 30px;
 }
 
 .card {
-  width: 110%;
-  max-width: 700px;
+  width: 700px;
   margin: 1em auto;
   flex-direction: row;
   background-color: #696969;
@@ -153,8 +153,13 @@ body {
   width: 30rem;
 }
 
+.form-control {
+  height: 3em;
+  border-radius: 10px;
+}
+
 .employee-form {
-  margin-top: 3em;
+  margin-top: 2em;
 }
 
 .btn-submit {

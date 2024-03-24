@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { IoPersonAddSharp } from "react-icons/io5";
 import { MdEdit, MdDelete } from "react-icons/md";
+import { Toaster, toast } from "react-hot-toast";
 
 const Employees = () => {
   const [empData, setEmpData] = useState([]);
@@ -41,6 +42,7 @@ const Employees = () => {
       .delete(`http://localhost:3000/api/employee/${id}`)
       .then((res) => {
         console.log(res);
+        toast.success("Employee deleted successfully");
         window.location.reload();
       })
       .catch((err) => console.log(err));
@@ -51,15 +53,12 @@ const Employees = () => {
       <div className="title">
         <h3>The Employee Manager </h3>
       </div>
+      <div className="btn-container">
+        <button className="cust-btn" onClick={() => navigate("/employeeform")}>
+          Add Employee <IoPersonAddSharp className="btn-icon-type1" />
+        </button>
+      </div>
       <div className="card-container">
-        <div className="btn-container">
-          <button
-            className="cust-btn"
-            onClick={() => navigate("/employeeform")}
-          >
-            Add Employee <IoPersonAddSharp className="btn-icon-type1" />
-          </button>
-        </div>
         {loading ? (
           <div className="text-center">
             <p>Loading...</p>
@@ -106,6 +105,7 @@ const Employees = () => {
           </div>
         )}
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 };

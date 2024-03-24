@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import * as Yup from "yup";
+import { Toaster, toast } from "react-hot-toast";
 
 function EmployeeForm() {
   const location = useLocation();
@@ -65,14 +66,16 @@ function EmployeeForm() {
           `http://localhost:3000/api/employee/${imployeeId}`,
           formData
         );
-        navigate("/");
+        toast.success("Employee Updated successfully");
+        setTimeout(() => navigate("/"), 2000);
       } else {
         // Create new employee
         response = await axios.post(
           "http://localhost:3000/api/employee",
           formData
         );
-        navigate("/");
+        toast.success("Employee created successfully");
+        setTimeout(() => navigate("/"), 2000);
       }
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
@@ -119,7 +122,9 @@ function EmployeeForm() {
               name="lastname"
               value={formData.lastname}
               onChange={handleChange}
-              className={`form-control ${errors.lastname ? "is-invalid" : ""}`}
+              className={`form-control custom-input ${
+                errors.lastname ? "is-invalid" : ""
+              }`}
             />
             {errors.lastname && (
               <div className="invalid-feedback">{errors.lastname}</div>
@@ -177,6 +182,7 @@ function EmployeeForm() {
           </div>
         </form>
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 }
