@@ -8,7 +8,7 @@ Features
 2. Add new employees to the system.
 3. Edit existing employee information.
 4. Delete employees from the system.
-5. Form validation for input fields.
+5. Form validation for input fields. ( I have used Yup for form validation)
 6. Custom styling using Bootstrap with custom CSS for enhanced UI
 
 Installation
