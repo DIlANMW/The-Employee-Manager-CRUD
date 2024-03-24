@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { IoPersonAddSharp } from "react-icons/io5";
+import { MdEdit, MdDelete } from "react-icons/md";
 
 const Employees = () => {
   const [empData, setEmpData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,8 +24,12 @@ const Employees = () => {
           }
         });
         setEmpData(sortedData);
+        setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
   }, []);
 
   const handleEdit = (id) => {
@@ -41,38 +47,64 @@ const Employees = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <Link to="/employeeform" className="btn btn-dark">
-        Add Employee +
-      </Link>
-      <div className="row">
-        {empData.map((employee) => (
-          <div className="card bg-light-subtle" key={employee._id}>
-            <div className="card-body">
-              <div className="text-section">
-                <h5 className="card-title fw-bold">{employee.firstname}</h5>
-                <h5 className="card-title fw-bold">{employee.lastname}</h5>
-                <p className="card-text">{employee.email}</p>
-                <p className="card-text">{employee.phone}</p>
-                <p className="card-text">{employee.gender}</p>
-              </div>
-              <div className="cta-section">
-                <button
-                  onClick={() => handleEdit(employee._id)}
-                  className="btn btn-dark"
-                >
-                  Edit
-                </button>
-                <button
-                  className="btn btn-dark"
-                  onClick={() => handleDelete(employee._id)}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
+    <div className="container">
+      <div className="title">
+        <h3>The Employee Manager </h3>
+      </div>
+      <div className="card-container">
+        <div className="btn-container">
+          <button
+            className="cust-btn"
+            onClick={() => navigate("/employeeform")}
+          >
+            Add Employee <IoPersonAddSharp className="btn-icon-type1" />
+          </button>
+        </div>
+        {loading ? (
+          <div className="text-center">
+            <p>Loading...</p>
           </div>
-        ))}
+        ) : (
+          <div className="row">
+            {empData?.length > 0 ? (
+              empData?.map((employee) => (
+                <div className="card bg-light-subtle" key={employee._id}>
+                  <div className="card-body">
+                    <div className="text-section">
+                      <h5 className="card-title fw-bold">
+                        {employee.firstname}
+                      </h5>
+                      <h5 className="card-title fw-bold">
+                        {employee.lastname}
+                      </h5>
+                      <p className="card-text">Email: {employee.email}</p>
+                      <p className="card-text">Phone No: {employee.phone}</p>
+                      <p className="card-text">Gender: {employee.gender}</p>
+                    </div>
+                    <div className="cta-section">
+                      <button
+                        onClick={() => handleEdit(employee._id)}
+                        className="cust-btn edit-btn"
+                      >
+                        <MdEdit className="btn-icon-type2" />
+                      </button>
+                      <button
+                        className="cust-btn delete-btn "
+                        onClick={() => handleDelete(employee._id)}
+                      >
+                        <MdDelete className="btn-icon-type2" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="noempdata text-center">
+                <p>No Employees Found</p>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

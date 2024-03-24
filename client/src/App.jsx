@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Employees from "./home/Employees";
-import EmployeeForm from "./components/EmployeeForm";
+import EmployeeForm from "./employee-form/EmployeeForm";
 import "./App.css";
 
 const App = () => {
