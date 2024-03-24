@@ -115,7 +115,7 @@ const deleteEmployee = async (request, response) => {
   }
 };
 
-//Delete employee
+//Get one employee
 const getOneEmployee = async (request, response) => {
   try {
     const employeeId = request.params.id;
