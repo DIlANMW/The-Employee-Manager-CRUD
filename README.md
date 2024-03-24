@@ -58,7 +58,7 @@ yup: ^1.4.0
 - **Add Employee**: `[POST] /api/employee`
 - **Update Employee**: `[PUT] /api/employee/:id`
 - **Delete Employee**: `[DELETE] /api/employee/:id`
-- **Get One Employee**: `[GET] /api/employee/:id`
+- **Get One Employee**: `[GET] /api/employee/:id`  (I added this extra endpoint because I want to update and create both from one component)
 
 The `EmployeeModel` schema defines the structure of employee documents stored in the MongoDB database. It includes the following fields:
 
