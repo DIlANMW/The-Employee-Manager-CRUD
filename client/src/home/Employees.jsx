@@ -38,14 +38,16 @@ const Employees = () => {
   };
 
   const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:3000/api/employee/${id}`)
-      .then((res) => {
-        console.log(res);
-        toast.success("Employee deleted successfully");
-        window.location.reload();
-      })
-      .catch((err) => console.log(err));
+  if (window.confirm("Are you sure you want to delete this employee?")) {
+      axios
+        .delete(`http://localhost:3000/api/employee/${id}`)
+        .then((res) => {
+          console.log(res);
+          toast.success("Employee deleted successfully");
+          window.location.reload();
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
