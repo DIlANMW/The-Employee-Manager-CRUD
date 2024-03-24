@@ -13,7 +13,7 @@ Features
 
 Installation
 
-1. git clone https://github.com/DIlANMW/The-Employee-Manger-CRUD.git
+1. git clone https://github.com/DIlANMW/The-Employee-Manager-CRUD.git
 2. cd client
 3. npm install( I have used yarn)
 4. npm run dev
