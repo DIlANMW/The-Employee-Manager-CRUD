@@ -45,9 +45,19 @@ function EmployeeForm() {
     event.preventDefault();
 
     try {
-      const schema = Yup.object().shape({
-        firstname: Yup.string().required("First Name is required"),
-        lastname: Yup.string().required("Last Name is required"),
+       const schema = Yup.object().shape({
+        firstname: Yup.string()
+          .required("First Name is required")
+          .matches(
+            /^[A-Za-z]{6,10}$/,
+            "First Name should only contain alphabets, min 6 and max 10 characters"
+          ),
+        lastname: Yup.string()
+          .required("Last Name is required")
+          .matches(
+            /^[A-Za-z]{6,10}$/,
+            "Last Name should only contain alphabets, min 6 and max 10 characters"
+          ),
         email: Yup.string()
           .email("Invalid email")
           .required("Email is required"),
