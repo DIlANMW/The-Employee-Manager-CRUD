@@ -23,6 +23,10 @@ const employeeSchema = new mongoose.Schema(
       enum: ["male", "female"],
       required: true,
     },
+    salary: {
+      type: Number,
+      required: true,
+    },
   },
   { timestamps: true }
 );

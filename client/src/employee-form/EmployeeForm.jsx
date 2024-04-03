@@ -14,6 +14,7 @@ function EmployeeForm() {
     email: "",
     phone: "",
     gender: "",
+    salary: "",
   });
   const [errors, setErrors] = useState({});
 
@@ -28,9 +29,9 @@ function EmployeeForm() {
       const response = await axios.get(
         `http://localhost:3000/api/employee/${id}`
       );
-      const { firstname, lastname, email, phone, gender } =
+      const { firstname, lastname, email, phone, gender, salary } =
         response.data.employee;
-      setFormData({ firstname, lastname, email, phone, gender });
+      setFormData({ firstname, lastname, email, phone, gender, salary });
     } catch (error) {
       console.error("Error fetching employee data:", error);
     }
@@ -45,7 +46,7 @@ function EmployeeForm() {
     event.preventDefault();
 
     try {
-       const schema = Yup.object().shape({
+      const schema = Yup.object().shape({
         firstname: Yup.string()
           .required("First Name is required")
           .matches(
@@ -65,6 +66,10 @@ function EmployeeForm() {
           .matches(/^(\+94|0)?(7[1-9]\d{7}|0\d{9})$/, "Invalid phone number")
           .required("Phone No is required"),
         gender: Yup.string().required("Gender is required"),
+        salary: Yup.number()
+          .typeError("Salary must be a number")
+          .positive("Salary must be a positive number")
+          .required("Salary is required"),
       });
 
       await schema.validate(formData, { abortEarly: false });
@@ -183,6 +188,20 @@ function EmployeeForm() {
             </select>
             {errors.gender && (
               <div className="invalid-feedback">{errors.gender}</div>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="salary">Salary:</label>
+            <input
+              type="number"
+              id="salary"
+              name="salary"
+              value={formData.salary}
+              onChange={handleChange}
+              className={`form-control ${errors.salary ? "is-invalid" : ""}`}
+            />
+            {errors.salary && (
+              <div className="invalid-feedback">{errors.salary}</div>
             )}
           </div>
           <div className="btn-submit">

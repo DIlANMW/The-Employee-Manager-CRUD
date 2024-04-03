@@ -4,7 +4,7 @@ import EmployeeModel from "../models/EmployeeModel.js";
 //Create Employee
 const createEmployee = async (request, response) => {
   try {
-    const { firstname, lastname, email, phone, gender } = request.body;
+    const { firstname, lastname, email, phone, gender, salary } = request.body;
 
     const newEmployee = new EmployeeModel({
       firstname,
@@ -12,6 +12,7 @@ const createEmployee = async (request, response) => {
       email,
       phone,
       gender,
+      salary,
     });
 
     await newEmployee.save();
