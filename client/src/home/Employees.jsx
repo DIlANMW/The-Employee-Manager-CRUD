@@ -75,7 +75,8 @@ const Employees = () => {
         </button>
       </div>
       <div className="total-salary">
-        Total Salary: {empData.reduce((total, emp) => total + emp.salary, 0)}
+        Total Salary: Rs:{" "}
+        {empData.reduce((total, emp) => total + emp.salary, 0)}
       </div>
       <div className="card-container">
         {loading ? (
